@@ -23,18 +23,7 @@ public interface HotelMapper {
     @Mapping(source = "city.name", target = "city")
     HotelResponseDto toHotelResponseDto(Hotel hotel);
     List<HotelResponseDto> toHotelResponseDtoList(List<Hotel> hotelList);
-    default PageResponseDto<HotelResponseDto> toPageResponseDto(Page<Hotel> hotelPage) {
-        List<HotelResponseDto> hotelResponseDtoList = toHotelResponseDtoList(hotelPage.getContent());
 
-        PageResponseDto<HotelResponseDto> pageResponseDto = new PageResponseDto<>();
-        pageResponseDto.setContent(hotelResponseDtoList);
-        pageResponseDto.setPageNumber(hotelPage.getNumber());
-        pageResponseDto.setPageSize(hotelPage.getSize());
-        pageResponseDto.setTotalElements(hotelPage.getTotalElements());
-        pageResponseDto.setTotalPages(hotelPage.getTotalPages());
-
-        return pageResponseDto;
-    }
     @Named("nameToCity")
     default City nameToCity(String cityName){
         City city = new City();

@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @Entity
 public class Hotel {
@@ -22,4 +25,7 @@ public class Hotel {
     private int rating;
     @Min(0)
     private int numberOfRatings;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Room> rooms = new HashSet<>();
+
 }

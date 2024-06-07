@@ -7,6 +7,7 @@ import com.example.Hotel.entity.Hotel;
 import com.example.Hotel.exception.BadRequestException;
 import com.example.Hotel.exception.EntityNotFoundException;
 import com.example.Hotel.mapper.HotelMapper;
+import com.example.Hotel.mapper.PageMapper;
 import com.example.Hotel.repository.CityRepository;
 import com.example.Hotel.repository.HotelRepository;
 import com.example.Hotel.service.HotelService;
@@ -23,6 +24,7 @@ public class HotelServiceImpl implements HotelService {
     private final HotelRepository hotelRepository;
     private final CityRepository cityRepository;
     private final HotelMapper hotelMapper;
+    private final PageMapper pageMapper;
     @Override
     public HotelResponseDto save(HotelRequestDto hotelRequestDto) {
         var hotel = hotelMapper.toEntity(hotelRequestDto);
@@ -37,7 +39,7 @@ public class HotelServiceImpl implements HotelService {
     }
     @Override
     public PageResponseDto<HotelResponseDto>findAll(Pageable pageable) {
-        return hotelMapper.toPageResponseDto(hotelRepository.findAll(pageable));
+        return pageMapper.toPageResponseDto(hotelRepository.findAll(pageable).map(hotelMapper::toHotelResponseDto));
     }
     @Override
     public HotelResponseDto findById(Long id) {

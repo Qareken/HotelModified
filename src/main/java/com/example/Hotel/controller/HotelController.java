@@ -5,6 +5,7 @@ import com.example.Hotel.dto.HotelRequestDto;
 import com.example.Hotel.dto.HotelResponseDto;
 import com.example.Hotel.dto.PageResponseDto;
 import com.example.Hotel.service.impl.HotelServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class HotelController {
         return ResponseEntity.ok().body(hotelService.findAll(pageRequest));
     }
     @PostMapping
-    public ResponseEntity<HotelResponseDto> createHotel(@RequestBody HotelRequestDto hotelRequestDto){
+    public ResponseEntity<HotelResponseDto> createHotel(@RequestBody @Valid HotelRequestDto hotelRequestDto){
         return ResponseEntity.ok().body(hotelService.save(hotelRequestDto));
     }
     @GetMapping("/by-id/{id}")
@@ -30,12 +31,12 @@ public class HotelController {
         return ResponseEntity.ok().body(hotelService.findById(id));
     }
     @DeleteMapping("/by-id/{id}")
-    public ResponseEntity<HotelResponseDto> deleteById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
         hotelService.deleteById(id);
         return ResponseEntity.ok().build();
     }
     @PutMapping("/by-id/{id}")
-    public ResponseEntity<HotelResponseDto> updateById(@RequestBody HotelRequestDto hotelRequestDto,@PathVariable Long id){
+    public ResponseEntity<HotelResponseDto> updateById(@RequestBody @Valid HotelRequestDto hotelRequestDto, @PathVariable Long id){
         return ResponseEntity.ok().body(hotelService.update(hotelRequestDto, id));
     }
 }
