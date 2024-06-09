@@ -32,13 +32,14 @@ public class RoomServiceImpl implements RoomService {
         var hotel = hotelRepository.findById(roomRequestDto.getHotelId());
         if(hotel.isPresent()){
             room.setHotel(hotel.get());
-            return roomMapper.toResponseDTO(roomRepository.save(room));
+            return roomMapper.toResponseDTO(saveRoom(room));
         }else {
             throw new BadRequestException(MessageFormat.format("Hotel with this id {} has not been registered", roomRequestDto.getHotelId()));
         }
-
     }
-
+    protected Room saveRoom(Room room){
+        return roomRepository.save(room);
+    }
     @Override
     public PageResponseDto<RoomResponseDto> findAll(Pageable pageable) {
         return pageMapper.toPageResponseDto(roomRepository.findAll(pageable).map(roomMapper::toResponseDTO));
@@ -48,7 +49,7 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponseDto findById(Long id) {
         return roomMapper.toResponseDTO(findRoomById(id));
     }
-    private Room findRoomById(Long id){
+    protected Room findRoomById(Long id){
         return roomRepository.findById(id).orElseThrow(()->new EntityNotFoundException(MessageFormat.format("Room with this id {} not found", id)));
     }
 

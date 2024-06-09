@@ -1,8 +1,6 @@
 package com.example.Hotel.repository;
 
-import com.example.Hotel.entity.Room;
 import com.example.Hotel.entity.Users;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
-    @EntityGraph(attributePaths = {"unavailableDates"})
-    @NotNull
-    Optional<Room> findById(@NotNull Long id);
+public interface UserRepository extends JpaRepository<Users, Long> {
+    @EntityGraph(attributePaths = {"roles"})
+    Optional<Users> findUsersByEmail(String email);
+    Boolean existsByNameOrEmail(String username, String email);
+
 }

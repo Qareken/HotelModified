@@ -23,8 +23,6 @@ public class RoomRequestDto {
     @Min(value = 1, message = "Max Occupancy must be at least 1")
     private Integer maxOccupancy;
 
-    private Set<LocalDateTime> unavailableDates;
-
     @NotNull(message = "Hotel ID must not be null")
     private Long hotelId;
 }

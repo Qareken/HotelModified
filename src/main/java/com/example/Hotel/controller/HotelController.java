@@ -20,11 +20,11 @@ public class HotelController {
     @GetMapping
     public ResponseEntity<PageResponseDto<HotelResponseDto>> getAllHotels(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
-        return ResponseEntity.ok().body(hotelService.findAll(pageRequest));
+        return ResponseEntity.ok(hotelService.findAll(pageRequest));
     }
     @PostMapping
     public ResponseEntity<HotelResponseDto> createHotel(@RequestBody @Valid HotelRequestDto hotelRequestDto){
-        return ResponseEntity.ok().body(hotelService.save(hotelRequestDto));
+        return ResponseEntity.ok(hotelService.save(hotelRequestDto));
     }
     @GetMapping("/by-id/{id}")
     public ResponseEntity<HotelResponseDto> findById(@PathVariable Long id){
@@ -37,6 +37,6 @@ public class HotelController {
     }
     @PutMapping("/by-id/{id}")
     public ResponseEntity<HotelResponseDto> updateById(@RequestBody @Valid HotelRequestDto hotelRequestDto, @PathVariable Long id){
-        return ResponseEntity.ok().body(hotelService.update(hotelRequestDto, id));
+        return ResponseEntity.ok(hotelService.update(hotelRequestDto, id));
     }
 }
