@@ -1,5 +1,6 @@
 package com.example.Hotel.service;
 
+import com.example.Hotel.dto.HotelRate;
 import com.example.Hotel.dto.HotelRequestDto;
 import com.example.Hotel.dto.HotelResponseDto;
 import com.example.Hotel.dto.PageResponseDto;
@@ -12,4 +13,5 @@ public interface HotelService {
 
     void deleteById(Long id);
     HotelResponseDto update(HotelRequestDto hotelRequestDto, Long id);
+    HotelResponseDto changeRate(HotelRate hotelRate);
 }

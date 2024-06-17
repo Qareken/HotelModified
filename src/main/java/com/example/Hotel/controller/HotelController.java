@@ -1,6 +1,7 @@
 package com.example.Hotel.controller;
 
 
+import com.example.Hotel.dto.HotelRate;
 import com.example.Hotel.dto.HotelRequestDto;
 import com.example.Hotel.dto.HotelResponseDto;
 import com.example.Hotel.dto.PageResponseDto;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class HotelController {
     private final HotelServiceImpl hotelService;
-
     @GetMapping
     public ResponseEntity<PageResponseDto<HotelResponseDto>> getAllHotels(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -38,5 +38,9 @@ public class HotelController {
     @PutMapping("/by-id/{id}")
     public ResponseEntity<HotelResponseDto> updateById(@RequestBody @Valid HotelRequestDto hotelRequestDto, @PathVariable Long id){
         return ResponseEntity.ok(hotelService.update(hotelRequestDto, id));
+    }
+    @PostMapping("/rate")
+     public ResponseEntity<HotelResponseDto> rate(@RequestBody @Valid HotelRate hotelRate){
+        return ResponseEntity.ok(hotelService.changeRate(hotelRate));
     }
 }

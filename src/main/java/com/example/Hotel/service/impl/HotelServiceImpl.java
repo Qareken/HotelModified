@@ -1,5 +1,6 @@
 package com.example.Hotel.service.impl;
 
+import com.example.Hotel.dto.HotelRate;
 import com.example.Hotel.dto.HotelRequestDto;
 import com.example.Hotel.dto.HotelResponseDto;
 import com.example.Hotel.dto.PageResponseDto;
@@ -58,5 +59,20 @@ public class HotelServiceImpl implements HotelService {
         var hotel = hotelMapper.toEntity(hotelRequestDto);
         BeanUtils.copyNonNullProperties(hotel, existedHotel);
         return hotelMapper.toHotelResponseDto(hotelRepository.save(existedHotel));
+    }
+
+    @Override
+    public HotelResponseDto changeRate(HotelRate hotelRate) {
+        var hotel = findHotelById(hotelRate.hotelId());
+        //totalRating = rating × numberOfRating
+        var totalRating = hotel.getRating() * hotel.getNumberOfRatings();
+        //totalRating = totalRating − rating + newMark
+        totalRating = totalRating - hotel.getRating() + hotelRate.rating();
+        //rating = totalRating / numberOfRating
+        hotel.setRating(totalRating/hotel.getNumberOfRatings());
+        //numberOfRating = numberOfRating + 1
+        hotel.setNumberOfRatings(hotel.getNumberOfRatings() + 1);
+
+        return hotelMapper.toHotelResponseDto(hotelRepository.save(hotel));
     }
 }

@@ -24,7 +24,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<PageResponseDto<UserResponseDto>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<PageResponseDto<UserResponseDto>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
         return ResponseEntity.ok(userService.findAll(pageRequest));
     }

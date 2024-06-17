@@ -23,7 +23,7 @@ public class RoomController {
     }
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<RoomResponseDto> createHotel(@RequestBody @Validated RoomRequestDto roomRequestDto, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<RoomResponseDto> createHotel(@RequestBody @Validated RoomRequestDto roomRequestDto){
         return ResponseEntity.ok().body(roomService.save(roomRequestDto));
     }
     @GetMapping("/by-id/{id}")
@@ -32,13 +32,13 @@ public class RoomController {
     }
     @DeleteMapping("/by-id/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
         roomService.deleteById(id);
         return ResponseEntity.ok().build();
     }
     @PutMapping("/by-id/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public ResponseEntity<RoomResponseDto> updateById(@RequestBody @Validated RoomRequestDto roomRequestDto,@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<RoomResponseDto> updateById(@RequestBody @Validated RoomRequestDto roomRequestDto,@PathVariable Long id){
         return ResponseEntity.ok().body(roomService.update(roomRequestDto, id));
     }
 }
