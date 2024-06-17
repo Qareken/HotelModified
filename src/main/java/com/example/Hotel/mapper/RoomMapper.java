@@ -22,6 +22,7 @@ public interface RoomMapper {
     RoomRequestDto toRequestDTO(Room room);
 
     @Mapping(source = "hotel", target = "hotel")
+
     RoomResponseDto toResponseDTO(Room room);
     List<RoomResponseDto> toRoomResponseDtoList(List<Room> hotelList);
 

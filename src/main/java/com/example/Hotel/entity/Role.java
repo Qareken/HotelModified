@@ -3,13 +3,20 @@ package com.example.Hotel.entity;
 import com.example.Hotel.entity.enumurated.RoleType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-@Data
+import java.util.HashSet;
+import java.util.Set;
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+
+@Builder
+@FieldNameConstants
 @Entity
 @Table(name = "authorities")
 public class Role {
@@ -18,12 +25,12 @@ public class Role {
     private Long id;
     @Enumerated(EnumType.STRING)
     private RoleType authority;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "username")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Builder.Default
     @JsonBackReference
-    private Users user;
+    private Set<Users> user = new HashSet<>();
     public GrantedAuthority toAuthority(){
         return   new SimpleGrantedAuthority(authority.name());
     }

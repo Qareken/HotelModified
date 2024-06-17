@@ -1,4 +1,8 @@
 spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
   jpa:
     generate-ddl: true
   datasource:
@@ -9,3 +13,10 @@ spring:
       schema: user_schema
       connection-init-sql: CREATE SCHEMA IF NOT EXISTS user_schema
       connection-timeout: 10000
+app:
+  jwt:
+    secret: "someHotelKey"
+    tokenExpiration: 15m
+    refreshTokenExpiration: 30m
+server:
+  port: 8090

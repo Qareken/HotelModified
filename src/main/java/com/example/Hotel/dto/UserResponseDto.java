@@ -1,6 +1,5 @@
 package com.example.Hotel.dto;
 
-import com.example.Hotel.entity.Role;
 import lombok.Data;
 
 import java.util.Set;

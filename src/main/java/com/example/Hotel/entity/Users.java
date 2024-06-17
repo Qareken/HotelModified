@@ -34,12 +34,18 @@ public class Users {
     @Email(message = "Email should be valid")
     @Column(unique = true, nullable = false)
     private String email;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_authorities",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Builder.Default
     @JsonManagedReference
     private Set<Role> roles = new HashSet<>();
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

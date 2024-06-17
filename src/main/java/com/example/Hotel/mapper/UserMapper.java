@@ -11,7 +11,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 

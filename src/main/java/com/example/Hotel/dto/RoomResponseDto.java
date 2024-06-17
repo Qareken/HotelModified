@@ -1,5 +1,6 @@
 package com.example.Hotel.dto;
 
+import com.example.Hotel.entity.UnAvailableDates;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -13,6 +14,6 @@ public class RoomResponseDto {
     private Integer numberOfRoom;
     private BigDecimal price;
     private Integer maxOccupancy;
-    private Set<LocalDateTime> unavailableDates;
+    private Set<UnAvailableDates> unavailableDates;
     private HotelResponseDto hotel;
 }

@@ -1,7 +1,5 @@
 package com.example.Hotel.dto;
 
-import com.example.Hotel.entity.Role;
-import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
 
