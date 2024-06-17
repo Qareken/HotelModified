@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,8 @@ public class UserController {
     private final SecurityService service;
     private final PasswordEncoder passwordEncoder;
     @GetMapping
-    public ResponseEntity<PageResponseDto<UserResponseDto>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public ResponseEntity<PageResponseDto<UserResponseDto>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @AuthenticationPrincipal UserDetails userDetails){
         PageRequest pageRequest = PageRequest.of(page, size);
         return ResponseEntity.ok(userService.findAll(pageRequest));
     }
@@ -37,7 +39,7 @@ public class UserController {
         return ResponseEntity.ok(service.register(userRequestDto));
     }
     @GetMapping("/by-id/{id}")
-    public ResponseEntity<UserResponseDto> findById(@PathVariable Long id){
+    public ResponseEntity<UserResponseDto> findById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
         return ResponseEntity.ok().body(userService.findById(id));
     }
 
@@ -51,12 +53,12 @@ public class UserController {
         return ResponseEntity.ok(new SimpleResponse("user logout. Username is: "+userDetails.getUsername()));
     }
     @DeleteMapping("/by-id/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
         userService.deleteById(id);
         return ResponseEntity.ok().build();
     }
     @PutMapping("/by-id/{id}")
-    public ResponseEntity<UserResponseDto> updateById(@RequestBody @Valid UserRequestDto userRequestDto, @PathVariable Long id){
+    public ResponseEntity<UserResponseDto> updateById(@RequestBody @Valid UserRequestDto userRequestDto, @PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
         userRequestDto.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
         return ResponseEntity.ok(userService.update(userRequestDto, id));
     }
