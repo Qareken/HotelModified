@@ -19,7 +19,7 @@ public class RoomController {
     @GetMapping
     public ResponseEntity<PageResponseDto<RoomResponseDto>> getAllHotels(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
-        return ResponseEntity.ok().body(roomService.findAll(pageRequest));
+        return ResponseEntity.ok().body(roomService.findALL(pageRequest));
     }
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")

@@ -26,7 +26,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<PageResponseDto<UserResponseDto>> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
-        return ResponseEntity.ok(userService.findAll(pageRequest));
+        return ResponseEntity.ok(userService.findALL(pageRequest));
     }
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> authUser(@RequestBody UserRequestDto upsertUserDTO){

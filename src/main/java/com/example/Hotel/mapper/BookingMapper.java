@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",uses = {RoomMapper.class, UserMapper.class},unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface BookingMapper {
+public interface BookingMapper extends CommonMapper<Booking, BookingRequestDto, BookingResponseDto> {
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "room.id", target = "roomId")
     BookingRequestDto toDto(Booking booking);

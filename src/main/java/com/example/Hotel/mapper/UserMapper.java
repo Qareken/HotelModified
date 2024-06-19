@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UserMapper {
+public interface UserMapper extends CommonMapper<Users, UserRequestDto, UserResponseDto> {
     default Set<Role> mapRolesFromNameToRole(Set<String> roles){
         return roles.stream().map(RoleType::fromLabel)
                 .map(Role::from).collect(Collectors.toSet());
@@ -29,5 +29,5 @@ public interface UserMapper {
     @Mapping(target = "roles",expression = "java(mapRolesFromRoleToName(users.getRoles()))")
     UserRequestDto toDto(Users users);
     @Mapping(target = "roles",expression = "java(mapRolesFromRoleToName(users.getRoles()))")
-    UserResponseDto toUserResponseDto(Users users);
+    UserResponseDto toResponseDto(Users users);
 }

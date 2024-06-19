@@ -3,7 +3,7 @@ package com.example.Hotel.dto.filter;
 import lombok.Data;
 
 @Data
-public class HotelFilter {
+public class HotelSearch {
 
     private String name;
 

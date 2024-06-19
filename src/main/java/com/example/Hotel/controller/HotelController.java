@@ -8,6 +8,7 @@ import com.example.Hotel.dto.PageResponseDto;
 import com.example.Hotel.service.impl.HotelServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class HotelController {
     @GetMapping
     public ResponseEntity<PageResponseDto<HotelResponseDto>> getAllHotels(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
-        return ResponseEntity.ok(hotelService.findAll(pageRequest));
+        return ResponseEntity.ok(hotelService.findALL(pageRequest));
     }
     @PostMapping
     public ResponseEntity<HotelResponseDto> createHotel(@RequestBody @Valid HotelRequestDto hotelRequestDto){
@@ -41,6 +42,7 @@ public class HotelController {
     }
     @PostMapping("/rate")
      public ResponseEntity<HotelResponseDto> rate(@RequestBody @Valid HotelRate hotelRate){
+
         return ResponseEntity.ok(hotelService.changeRate(hotelRate));
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
+public interface RoomRepository extends JpaRepository<Room, Long> , CommonRepository<Room, Long>{
     @EntityGraph(attributePaths = {"unavailableDates"})
     @NotNull
     Optional<Room> findById(@NotNull Long id);
