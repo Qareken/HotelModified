@@ -15,10 +15,10 @@ public class HotelSpecification extends CommonSpecification<Hotel> {
             List<Predicate> predicates = new ArrayList<>();
             addEqualPredicateIfNotNull(criteriaBuilder, root.get("id"), search.getId(), predicates);
             addLikePredicateIfNotNull(criteriaBuilder, root.get("name"), search.getName(), predicates);
-            addLikePredicateIfNotNull(criteriaBuilder, root.get("headline"), search.getTitle(), predicates);
+            addLikePredicateIfNotNull(criteriaBuilder, root.get("title"), search.getTitle(), predicates);
             addLikePredicateIfNotNull(criteriaBuilder, root.get("city").get("name"), search.getCityName(), predicates);
             addLikePredicateIfNotNull(criteriaBuilder, root.get("address"), search.getAddress(), predicates);
-            addEqualPredicateIfNotNull(criteriaBuilder, root.get("distanceToCityCenter"), search.getDistance(), predicates);
+            addEqualPredicateIfNotNull(criteriaBuilder, root.get("distance"), search.getDistance(), predicates);
             addEqualPredicateIfNotNull(criteriaBuilder, root.get("rating"), search.getRating(), predicates);
             addEqualPredicateIfNotNull(criteriaBuilder, root.get("numberOfRatings"), search.getRatingCount(), predicates);
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
