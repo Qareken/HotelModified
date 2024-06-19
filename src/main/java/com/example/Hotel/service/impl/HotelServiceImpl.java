@@ -1,5 +1,8 @@
 package com.example.Hotel.service.impl;
 
+import com.example.Hotel.dto.PageRequestDto;
+import com.example.Hotel.dto.PageResponseDto;
+import com.example.Hotel.dto.filter.HotelSearch;
 import com.example.Hotel.dto.hotelDto.HotelRate;
 import com.example.Hotel.dto.hotelDto.HotelRequestDto;
 import com.example.Hotel.dto.hotelDto.HotelResponseDto;
@@ -9,6 +12,9 @@ import com.example.Hotel.mapper.HotelMapper;
 import com.example.Hotel.repository.CityRepository;
 import com.example.Hotel.repository.HotelRepository;
 import com.example.Hotel.service.HotelService;
+import com.example.Hotel.service.specification.HotelSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -46,5 +52,11 @@ public class HotelServiceImpl extends CommonServiceImpl<HotelRequestDto, HotelRe
         hotel.setNumberOfRatings(hotel.getNumberOfRatings() + 1);
 
         return mapper.toResponseDto(repository.save(hotel));
+    }
+
+    @Override
+    public PageResponseDto<HotelResponseDto> search(HotelSearch hotelSearch, PageRequestDto pageRequestDto) {
+        Pageable pageable =  new HotelSpecification().createPagination(pageRequestDto);
+        return mapper.toPageResponseDto(repository.findAll(HotelSpecification.getHotels(hotelSearch), pageable).map(mapper::toResponseDto));
     }
 }
