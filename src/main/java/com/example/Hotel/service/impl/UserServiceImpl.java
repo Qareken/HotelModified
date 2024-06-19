@@ -36,16 +36,7 @@ public class UserServiceImpl extends CommonServiceImpl<UserRequestDto , UserResp
             persistedRoles.add(Objects.requireNonNullElse(existingRole, role));
         }
         user.setRoles(persistedRoles);
-
         return mapper.toResponseDto(repository.save(user));
-    }
-
-    protected Users findUsersById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("User with this {} id not found!!", id)));
-    }
-    @Override
-    public UserResponseDto findById(Long id) {
-        return mapper.toResponseDto(findUsersById(id));
     }
     @Override
     public Users findByName(String name) {
