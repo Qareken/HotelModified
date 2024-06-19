@@ -1,10 +1,10 @@
-package com.example.Hotel.dto;
+package com.example.Hotel.dto.roomDto;
 
+import com.example.Hotel.dto.hotelDto.HotelResponseDto;
 import com.example.Hotel.entity.UnAvailableDates;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data

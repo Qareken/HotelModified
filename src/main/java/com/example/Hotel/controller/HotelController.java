@@ -1,14 +1,13 @@
 package com.example.Hotel.controller;
 
 
-import com.example.Hotel.dto.HotelRate;
-import com.example.Hotel.dto.HotelRequestDto;
-import com.example.Hotel.dto.HotelResponseDto;
+import com.example.Hotel.dto.hotelDto.HotelRate;
+import com.example.Hotel.dto.hotelDto.HotelRequestDto;
+import com.example.Hotel.dto.hotelDto.HotelResponseDto;
 import com.example.Hotel.dto.PageResponseDto;
 import com.example.Hotel.service.impl.HotelServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

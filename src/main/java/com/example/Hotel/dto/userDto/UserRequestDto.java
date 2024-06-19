@@ -1,4 +1,4 @@
-package com.example.Hotel.dto;
+package com.example.Hotel.dto.userDto;
 
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;

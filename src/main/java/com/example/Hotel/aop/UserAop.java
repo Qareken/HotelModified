@@ -1,6 +1,6 @@
 package com.example.Hotel.aop;
 
-import com.example.Hotel.dto.UserRequestDto;
+import com.example.Hotel.dto.userDto.UserRequestDto;
 import com.example.Hotel.entity.enumurated.RoleType;
 import com.example.Hotel.exception.ValidException;
 import com.example.Hotel.security.AppUserDetails;

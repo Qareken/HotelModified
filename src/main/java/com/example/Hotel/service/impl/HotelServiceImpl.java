@@ -1,8 +1,8 @@
 package com.example.Hotel.service.impl;
 
-import com.example.Hotel.dto.HotelRate;
-import com.example.Hotel.dto.HotelRequestDto;
-import com.example.Hotel.dto.HotelResponseDto;
+import com.example.Hotel.dto.hotelDto.HotelRate;
+import com.example.Hotel.dto.hotelDto.HotelRequestDto;
+import com.example.Hotel.dto.hotelDto.HotelResponseDto;
 import com.example.Hotel.entity.Hotel;
 import com.example.Hotel.exception.BadRequestException;
 import com.example.Hotel.mapper.HotelMapper;

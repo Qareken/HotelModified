@@ -1,6 +1,7 @@
 package com.example.Hotel.controller;
 
 import com.example.Hotel.dto.*;
+import com.example.Hotel.dto.userDto.*;
 import com.example.Hotel.security.SecurityService;
 import com.example.Hotel.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;

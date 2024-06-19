@@ -1,4 +1,4 @@
-package com.example.Hotel.dto;
+package com.example.Hotel.dto.bookingDto;
 
 import com.example.Hotel.customValid.DateCheck;
 import lombok.Data;

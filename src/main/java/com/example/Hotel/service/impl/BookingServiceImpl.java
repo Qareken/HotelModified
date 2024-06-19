@@ -1,7 +1,7 @@
 package com.example.Hotel.service.impl;
 
-import com.example.Hotel.dto.BookingRequestDto;
-import com.example.Hotel.dto.BookingResponseDto;
+import com.example.Hotel.dto.bookingDto.BookingRequestDto;
+import com.example.Hotel.dto.bookingDto.BookingResponseDto;
 import com.example.Hotel.entity.Booking;
 import com.example.Hotel.entity.UnAvailableDates;
 import com.example.Hotel.exception.BadRequestException;
@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.util.Set;
-
 @Service
-
 public class BookingServiceImpl extends CommonServiceImpl<BookingRequestDto, BookingResponseDto, Booking, Long> {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;

@@ -1,8 +1,8 @@
 package com.example.Hotel.mapper;
 
 
-import com.example.Hotel.dto.UserRequestDto;
-import com.example.Hotel.dto.UserResponseDto;
+import com.example.Hotel.dto.userDto.UserRequestDto;
+import com.example.Hotel.dto.userDto.UserResponseDto;
 import com.example.Hotel.entity.Role;
 
 import com.example.Hotel.entity.Users;

@@ -1,6 +1,5 @@
 package com.example.Hotel.aop;
 
-import com.example.Hotel.dto.HotelRequestDto;
 import com.example.Hotel.exception.ValidException;
 import com.example.Hotel.security.SecurityService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect

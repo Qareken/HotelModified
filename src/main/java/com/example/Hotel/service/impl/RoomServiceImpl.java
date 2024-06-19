@@ -1,8 +1,8 @@
 package com.example.Hotel.service.impl;
 
 
-import com.example.Hotel.dto.RoomRequestDto;
-import com.example.Hotel.dto.RoomResponseDto;
+import com.example.Hotel.dto.roomDto.RoomRequestDto;
+import com.example.Hotel.dto.roomDto.RoomResponseDto;
 import com.example.Hotel.entity.Room;
 import com.example.Hotel.exception.BadRequestException;
 import com.example.Hotel.mapper.CommonMapper;

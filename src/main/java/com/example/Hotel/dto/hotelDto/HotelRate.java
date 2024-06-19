@@ -1,4 +1,4 @@
-package com.example.Hotel.dto;
+package com.example.Hotel.dto.hotelDto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

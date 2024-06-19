@@ -1,6 +1,6 @@
 package com.example.Hotel.customValid;
 
-import com.example.Hotel.dto.BookingRequestDto;
+import com.example.Hotel.dto.bookingDto.BookingRequestDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

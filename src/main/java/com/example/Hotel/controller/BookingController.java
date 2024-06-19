@@ -1,6 +1,8 @@
 package com.example.Hotel.controller;
 
 import com.example.Hotel.dto.*;
+import com.example.Hotel.dto.bookingDto.BookingRequestDto;
+import com.example.Hotel.dto.bookingDto.BookingResponseDto;
 import com.example.Hotel.service.impl.BookingServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,7 @@ public class BookingController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<PageResponseDto<BookingResponseDto>> getAllBooking(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
         PageRequest pageRequest = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookingService.findAll(pageRequest));
+        return ResponseEntity.ok(bookingService.findALL(pageRequest));
     }
     @PostMapping
     public ResponseEntity<BookingResponseDto> createBooking(@RequestBody @Valid BookingRequestDto bookingRequestDto){

@@ -1,13 +1,12 @@
 package com.example.Hotel.security;
 
 
-import com.example.Hotel.dto.*;
+import com.example.Hotel.dto.userDto.*;
 import com.example.Hotel.entity.RefreshToken;
 import com.example.Hotel.entity.Users;
 import com.example.Hotel.entity.enumurated.RoleType;
 import com.example.Hotel.exception.RefreshTokenException;
 import com.example.Hotel.exception.ValidException;
-import com.example.Hotel.repository.RoleRepository;
 import com.example.Hotel.repository.UserRepository;
 import com.example.Hotel.security.jwt.JwtUtils;
 import com.example.Hotel.service.impl.RefreshTokenService;
@@ -19,7 +18,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,17 +1,11 @@
 package com.example.Hotel.mapper;
 
-import com.example.Hotel.dto.HotelResponseDto;
-import com.example.Hotel.dto.PageResponseDto;
-import com.example.Hotel.dto.RoomRequestDto;
-import com.example.Hotel.dto.RoomResponseDto;
-import com.example.Hotel.entity.Hotel;
+import com.example.Hotel.dto.roomDto.RoomRequestDto;
+import com.example.Hotel.dto.roomDto.RoomResponseDto;
 import com.example.Hotel.entity.Room;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring",uses = {HotelMapper.class},unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoomMapper extends CommonMapper<Room, RoomRequestDto, RoomResponseDto> {
