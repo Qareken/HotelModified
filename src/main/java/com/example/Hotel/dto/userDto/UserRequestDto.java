@@ -1,5 +1,6 @@
 package com.example.Hotel.dto.userDto;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
+@Builder
 @FieldNameConstants
 public class UserRequestDto {
     @NotBlank(message = "Username is mandatory")

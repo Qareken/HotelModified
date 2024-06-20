@@ -11,6 +11,7 @@ import java.util.Set;
 public class RoomResponseDto {
     private Long id;
     private String name;
+    private String title;
     private Integer numberOfRoom;
     private BigDecimal price;
     private Integer maxOccupancy;

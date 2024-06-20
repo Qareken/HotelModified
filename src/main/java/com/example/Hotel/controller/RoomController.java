@@ -1,10 +1,15 @@
 package com.example.Hotel.controller;
 
 import com.example.Hotel.dto.*;
+import com.example.Hotel.dto.filter.CommonSearch;
+import com.example.Hotel.dto.filter.HotelSearch;
+import com.example.Hotel.dto.filter.RoomSearch;
+import com.example.Hotel.dto.hotelDto.HotelResponseDto;
 import com.example.Hotel.dto.roomDto.RoomRequestDto;
 import com.example.Hotel.dto.roomDto.RoomResponseDto;
 import com.example.Hotel.service.impl.RoomServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/hotels/room")
 @RequiredArgsConstructor
+@Slf4j
 public class RoomController {
     private final RoomServiceImpl roomService;
     @GetMapping
@@ -40,5 +46,10 @@ public class RoomController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponseDto> updateById(@RequestBody @Validated RoomRequestDto roomRequestDto,@PathVariable Long id){
         return ResponseEntity.ok().body(roomService.update(roomRequestDto, id));
+    }
+    @PostMapping("/search")
+    public ResponseEntity<PageResponseDto<RoomResponseDto>> search(@RequestBody @Validated CommonSearch<RoomSearch> roomSearch){
+        log.info("hotelSearch {}", roomSearch);
+        return ResponseEntity.ok(roomService.search(roomSearch));
     }
 }

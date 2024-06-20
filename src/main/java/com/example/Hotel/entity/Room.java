@@ -22,6 +22,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String title;
     private Integer numberOfRoom;
     private BigDecimal price;
     private Integer maxOccupancy;

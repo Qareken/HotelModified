@@ -12,6 +12,8 @@ import java.util.Set;
 public class RoomRequestDto {
     @NotEmpty(message = "Name must not be empty")
     private String name;
+    @NotEmpty(message = "Name must not be empty")
+    private String title;
 
     @NotNull(message = "Number of Room must not be null")
     private Integer numberOfRoom;
