@@ -35,13 +35,19 @@ dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-security")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation ("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("org.springframework.kafka:spring-kafka")
+	// https://mvnrepository.com/artifact/com.opencsv/opencsv
+
+// https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+	implementation("org.apache.poi:poi-ooxml:5.2.5")
 	implementation("redis.clients:jedis")
+	testImplementation("org.springframework.kafka:spring-kafka-test")
 	annotationProcessor("org.projectlombok:lombok")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation ("org.testcontainers:postgresql")
 	testImplementation ("org.springframework.security:spring-security-test")
-	// https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	testImplementation("org.testcontainers:junit-jupiter:1.19.8")
 	implementation("javax.xml.bind:jaxb-api:2.3.1")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

@@ -15,7 +15,7 @@ import com.example.Hotel.repository.CityRepository;
 import com.example.Hotel.repository.HotelRepository;
 import com.example.Hotel.service.HotelService;
 import com.example.Hotel.service.specification.HotelSpecification;
-import com.example.Hotel.service.specification.RoomSpecification;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

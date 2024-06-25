@@ -20,8 +20,10 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl extends CommonServiceImpl<UserRequestDto , UserResponseDto, Users, Long> implements UserService  {
-    public UserServiceImpl(CommonRepository<Users, Long> repository, CommonMapper<Users, UserRequestDto, UserResponseDto> mapper, RoleRepository roleRepository) {
+    private final KafkaProducerService kafkaProducerService;
+    public UserServiceImpl(CommonRepository<Users, Long> repository, CommonMapper<Users, UserRequestDto, UserResponseDto> mapper,KafkaProducerService kafkaProducerService, RoleRepository roleRepository) {
         super(repository, mapper);
+        this.kafkaProducerService = kafkaProducerService;
         this.roleRepository = roleRepository;
     }
     private final RoleRepository roleRepository;
@@ -36,7 +38,9 @@ public class UserServiceImpl extends CommonServiceImpl<UserRequestDto , UserResp
             persistedRoles.add(Objects.requireNonNullElse(existingRole, role));
         }
         user.setRoles(persistedRoles);
-        return mapper.toResponseDto(repository.save(user));
+        user = repository.save(user);
+        kafkaProducerService.sendUserRegistrationEvent(user.getId());
+        return mapper.toResponseDto(user);
     }
     @Override
     public Users findByName(String name) {

@@ -20,16 +20,21 @@ public class BookingServiceImpl extends CommonServiceImpl<BookingRequestDto, Boo
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
 
-    public BookingServiceImpl(BookingRepository repository, BookingMapper mapper, UserRepository userService, RoomRepository roomService) {
+    private final KafkaProducerService kafkaProducerService;
+    public BookingServiceImpl(BookingRepository repository, BookingMapper mapper, UserRepository userService, RoomRepository roomService, KafkaProducerService kafkaProducerService) {
         super(repository, mapper);
         this.roomRepository = roomService;
         this.userRepository = userService;
+
+        this.kafkaProducerService = kafkaProducerService;
     }
     @Override
     public BookingResponseDto save(BookingRequestDto bookingRequestDto) {
         var booking = mapper.toEntity(bookingRequestDto);
-        var room = roomRepository.findById(booking.getRoom().getId()).orElseThrow(()->new EntityNotFoundException(MessageFormat.format("Room with this {} : id not found", booking.getRoom().getId())));
-        var user = userRepository.findById(booking.getUser().getId()).orElseThrow(()->new EntityNotFoundException(MessageFormat.format("User with this {} : id not found", booking.getUser().getId())));
+        var roomId = booking.getRoom().getId();
+        var userId= booking.getUser().getId();
+        var room = roomRepository.findById(booking.getRoom().getId()).orElseThrow(()->new EntityNotFoundException(MessageFormat.format("Room with this {} : id not found", roomId)));
+        var user = userRepository.findById(booking.getUser().getId()).orElseThrow(()->new EntityNotFoundException(MessageFormat.format("User with this {} : id not found", userId)));
         if (validBookingTime(room.getUnavailableDates(), booking.getArrivalDate(), booking.getDepartureDate())) {
             throw new BadRequestException(MessageFormat.format("Room is not available between {0} and {1} period", booking.getArrivalDate(), booking.getDepartureDate()));
         }
@@ -43,7 +48,9 @@ public class BookingServiceImpl extends CommonServiceImpl<BookingRequestDto, Boo
         room = roomRepository.save(room);
         booking.setUser(user);
         booking.setRoom(room);
-        return mapper.toResponseDto(repository.save(booking));
+        booking=repository.save(booking);
+        kafkaProducerService.sendBookingEvent(booking);
+        return mapper.toResponseDto(booking);
     }
     private boolean validBookingTime(Set<UnAvailableDates> unAvailableDates, LocalDateTime arrival, LocalDateTime departure) {
         return unAvailableDates.stream().anyMatch(unAvailable -> unAvailable.getStartDate().isBefore(departure) && arrival.isBefore(unAvailable.getEndDate()));
